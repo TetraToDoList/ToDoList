@@ -39,7 +39,7 @@ exports.addComplete = async (req, res) => {
 };
 
 exports.complete = async (req, res) => {
-  const list = await User.findOne({ email: req.user.email }, { isCompleted: 1 })
+  const list = await User.findOne({ email: req.user.email })
     .select('complete')
     .populate('complete')
     .exec();
@@ -49,10 +49,16 @@ exports.complete = async (req, res) => {
 
 exports.removeFromComplete = async (req, res) => {
   const { toDoListId } = req.params;
+  // const _id = req.params.toDoListId;
   const user = await User.findOneAndUpdate(
     { email: req.user.email },
     { $pull: { complete: toDoListId } }
   ).exec();
+
+  // await ToDoList.findByIdAndUpdate(
+  //   _id,
+  //   { isCompleted: 0 }
+  // );
 
   res.json({ ok: true });
 };

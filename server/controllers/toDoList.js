@@ -49,12 +49,16 @@ exports.remove = async (req, res) => {
 
 exports.removeFromHome = async (req, res) => {
   try {
-    const { isCompleted } = 1;
-    const toDoList = await ToDoList.findOneAndUpdate(
-      { slug: req.params.slug },
-      { isCompleted },
-      { new: true }
-    ).exec();
+    const isCompleted = 1;
+    const _id = req.params.toDoListId;
+    console.log(_id);
+    const toDoList = await ToDoList.findByIdAndUpdate(
+      _id,
+      { isCompleted: isCompleted },
+      {
+        new: true,
+      }
+    );
 
     res.json(toDoList);
   } catch (error) {

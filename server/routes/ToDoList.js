@@ -19,7 +19,7 @@ router.get("/home", list);
 router.get("/home/:slug", read);
 router.put("/home/:slug", authCheck, update);
 router.delete("/home/:slug", authCheck, remove);
-router.put('/removeFromHome/:slug', authCheck, removeFromHome);
+router.put('/removeFromHome/:toDoListId', authCheck, removeFromHome);
 
 
 module.exports = router;
